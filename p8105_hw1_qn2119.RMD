@@ -66,7 +66,7 @@ coerced.numeric.df <- variable.types.df %>%
 head(coerced.numeric.df[,5:7])
 ```
 
-When we attempt to coerce the logical, character, and factor variable data types, respectively, we see that the logical is transformed from `TRUE` and `FALSE` to 1's and 0's, the character cannot be coerced to numeric and produces `NA`'s, while the factor variable is converted to a numeric describing which level in which the factor object resides. However, it is important to note that if a character variable took the form `c("1", "2", etc.), it would be coerced to the corresponding integer by `as.numeric()`. 
+When we attempt to coerce the logical, character, and factor variable data types, respectively, we see that the logical is transformed from `TRUE` and `FALSE` to 1's and 0's, the character cannot be coerced to numeric and produces `NA`'s, while the factor variable is converted to a numeric describing which level in which the factor object resides. However, it is important to note that if a character variable took the form `c("1", "2", etc.)`, it would be coerced to the corresponding integer by `as.numeric()`. 
 
 Lastly, we will coerce the original character variable to factor to numeric and the original factor variable to character to numeric. 
 ```{r coercion.2, results = FALSE, warning = FALSE}
@@ -105,7 +105,7 @@ Here, our data frame `standard.normal.df` has `r nrow(standard.normal.df)` obser
 
 Next we shall produce a scatter plots of `y ~ x`, with different colorings by the numeric and factor variables.
 ```{r scatter}
-
+#Here we are making a generic scatter plot of x, y from standard.norm.df using ggplot2
 gg.scatter.x.y <- standard.normal.df %>%
   ggplot() +
   geom_point(aes(x, y), colour = "purple", alpha = 0.8, size = 1) +
@@ -113,8 +113,13 @@ gg.scatter.x.y <- standard.normal.df %>%
   xlab("X - Random Sample ~ N(0,1)") +
   ggtitle("Scatter Plot of Standard Normals X,Y")
 
+#Let's take a look at the plot
 gg.scatter.x.y
 
+#Let's also save the generic scatterplot for later using ggsave
+ggsave(file = "standard_normal_scatter_x_y.jpg", plot = gg.scatter.x.y)
+
+#Here we are making the same scatter of x, y; but are coloring observations by casting logical as numeric
 gg.scatter.x.y.numeric <- standard.normal.df %>%
   ggplot() +
   geom_point(aes(x, y, color = numeric.logical), alpha = 0.8, size = 1) +
@@ -123,8 +128,10 @@ gg.scatter.x.y.numeric <- standard.normal.df %>%
   xlab("X - Random Sample ~ N(0,1)") +
   ggtitle("Scatter Plot of Standard Normals X,Y; Colored by Numeric Logical")
 
+#Let's take a look at the plot
 gg.scatter.x.y.numeric
 
+#Here we are doing the same as above, but coloring by casting logical as factor 
 gg.scatter.x.y.factor <- standard.normal.df %>%
   ggplot() +
   geom_point(aes(x, y, color = factor.logical), alpha = 0.8, size = 1) +
@@ -135,5 +142,6 @@ gg.scatter.x.y.factor <- standard.normal.df %>%
   xlab("X - Random Sample ~ N(0,1)") +
   ggtitle("Scatter Plot of Standard Normals X,Y; Colored by Factor Logical")
 
+#Let's take a look at the plot
 gg.scatter.x.y.factor
 ```
