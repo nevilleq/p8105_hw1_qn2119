@@ -1,6 +1,6 @@
 # p8105_hw1_qn2119
 
-## P8105 Data Science##
+## P8105 Data Science ##
 ### Homework 1  ###
 #### Problem 1 ####
 Create a data frame containing different variable types, take the mean of each variable. What works and what doesn't? Why?
