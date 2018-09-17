@@ -118,18 +118,22 @@ gg.scatter.x.y
 gg.scatter.x.y.numeric <- standard.normal.df %>%
   ggplot() +
   geom_point(aes(x, y, color = numeric.logical), alpha = 0.8, size = 1) +
+  scale_colour_gradientn(colours = topo.colors(2)) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
-  ggtitle("Scatter Plot of Standard Normals X,Y")
+  ggtitle("Scatter Plot of Standard Normals X,Y; Colored by Numeric Logical")
 
 gg.scatter.x.y.numeric
 
 gg.scatter.x.y.factor <- standard.normal.df %>%
   ggplot() +
-  geom_point(aes(x, y, color = numeric.logical), alpha = 0.8, size = 1) +
+  geom_point(aes(x, y, color = factor.logical), alpha = 0.8, size = 1) +
+  scale_colour_manual(values = c("maroon", "darkblue"),
+                      labels = expression("False", "True")
+                      ) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
-  ggtitle("Scatter Plot of Standard Normals X,Y")
+  ggtitle("Scatter Plot of Standard Normals X,Y; Colored by Factor Logical")
 
 gg.scatter.x.y.factor
 ```
