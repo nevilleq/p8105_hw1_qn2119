@@ -15,7 +15,7 @@ library(tidyverse)
 ```
 
 #Problem 1
-First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $Y$ = [Zero, One, Two], and a coerced factor variable of the previous variable.
+First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random word sample from the sentence, "The quick brown fox jumps over the lazy dog", and a randomly selected factor variable in five levels.
 
 ```{r problem.1.df}
 #Defining number of rows/observations for our variable types data frame
@@ -79,7 +79,7 @@ coerced.factor.char.df <- variable.types.df %>%
 head(coerced.factor.char.df[,5:6])
 ```
 
-Again, we see that coercing the character variable to a factor and then numeric, transforms the character variable to a factor with 8 levels, then to a numeric describing the corresponding levels in which the corresponding factor resides. On the other hand, because our original factor variable was "numeric", in the sense that it had 5 levels, described 1-5, when we coerce this variable to a character, it looks like `c("1", "3", etc.)`. So when we then coerce it to numeric, it assumes the integer values described by the characters. If, however, the factor levels had been ordinal rather than numeric, the end result would have been `NA` as true character variables cannot be coerced to numeric, as we saw earlier. 
+Again, we see that coercing the character variable to a factor and then numeric, transforms the character variable to a factor with 8 levels, then to a numeric describing the corresponding levels in which the corresponding factor resides. On the other hand, because our original factor variable was "numeric", in the sense that it had 5 levels, described 1-5, when we coerce this variable to a character, it looks like `c("1", "3", etc.)`. So when we then coerce it to numeric, it assumes the integer values described by the characters. If, however, the factor levels had been categories described by characters, rather than numeric, the end result would have been `NA` as true character variables cannot be coerced to numeric, as we saw earlier. 
 
 #Problem 2
 First, we will create a data frame `standard.normal.df` with variables describing two seperate random samples of size 1000 from the standard Normal distribution, a logical variable describing where the sum of the first two variables is greater than zero, and a numeric and factor variable coerced from the logical.
@@ -111,7 +111,7 @@ gg.scatter.x.y <- standard.normal.df %>%
   geom_point(aes(x, y), colour = "purple", alpha = 0.8, size = 1) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
-  ggtitle("Scatter Plot of Standard Normals X,Y")
+  ggtitle("Scatter Plot of Standard Normal Samples X,Y")
 
 #Let's take a look at the plot
 gg.scatter.x.y
@@ -126,7 +126,7 @@ gg.scatter.x.y.numeric <- standard.normal.df %>%
   scale_colour_gradientn(colours = topo.colors(2)) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
-  ggtitle("Scatter Plot of Standard Normals X,Y; Colored by Numeric Logical")
+  ggtitle("Scatter Plot of Standard Normal Samples X,Y; Colored by Numeric Logical")
 
 #Let's take a look at the plot
 gg.scatter.x.y.numeric
@@ -140,7 +140,7 @@ gg.scatter.x.y.factor <- standard.normal.df %>%
                       ) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
-  ggtitle("Scatter Plot of Standard Normals X,Y; Colored by Factor Logical")
+  ggtitle("Scatter Plot of Standard Normal Samples X,Y; Colored by Factor Logical")
 
 #Let's take a look at the plot
 gg.scatter.x.y.factor
