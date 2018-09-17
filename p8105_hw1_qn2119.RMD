@@ -15,11 +15,14 @@ library(tidyverse)
 ```
 
 #Problem 1
-First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $[Zero, One, Two]$, and a coerced factor variable of the previous variable.
+First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $Y$ = [Zero, One, Two], and a coerced factor variable of the previous variable.
 
 ```{r var.types.df}
 #Defining number of columns in data frame
 n.col.df <- 10
+
+#Set the seed for reproducibility
+set.seed(24)
 
 #Creating our data frame with rUnif(0,5), logical, character random sample, and factor vars
 variable.types.df <- tibble(
@@ -29,6 +32,21 @@ variable.types.df <- tibble(
   factor.char.sample = as.factor(char.sample)
 )
 ```
+
+Now, we will attempt to take the mean of each variable in `variable.types.df`.
+```{r mean.var.types, warning = FALSE, message = FALSE}
+#Here we use the apply function to apply the mean function to each column var
+mean.variable.types <- apply(variable.types.df, 2, mean)
+
+#Apply gives all NA's because last 2 cols are non-numeric, so will go individually instead
+mean.variable.types <- with(variable.types.df, c(mean(unif.sample),
+                                               mean(logical.unif.g.2),
+                                               mean(char.sample),
+                                               mean(factor.char.sample)))
+names(mean.variable.types) <- colnames(variable.types.df)
+mean.variable.types
+```
+We see that the `mean()` function works for the Uniform sample variable because it is of numeric data type, and surprisingly also works for the logical variable describing whether each value in the sample is greater than two. This occurs because when `mean()` encounters a logical data type, it automatically converts it using `as.numeric()` to 1's and 0's, thus giving us the numeric proportion of `TRUE` for the logical variable. As for the character and factor variables, the `mean()` function does not work because these data types are non-numeric, and returns `NA` instead. 
 
 #Problem 2
 
