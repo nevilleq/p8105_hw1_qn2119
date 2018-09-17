@@ -17,7 +17,7 @@ library(tidyverse)
 #Problem 1
 First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $Y$ = [Zero, One, Two], and a coerced factor variable of the previous variable.
 
-```{r problem.2.df}
+```{r problem.1.df}
 #Defining number of rows/observations for our variable types data frame
 n.row.types.df <- 10
 
@@ -101,3 +101,35 @@ standard.normal.df <- tibble(
 )
 ```
 
+Here, our data frame `standard.normal.df` has `r nrow(standard.normal.df)` observations in `r ncol(standard.normal.df)` variables. Additionally, the standard normal random sample `x` has mean of `r mean(standard.normal.df$x)` and a median of `r median(standard.normal.df$x)`, closely approximating the distribution it was drawn from. Lastly, `r 100 * mean(standard.normal.df$logical.sum.g.0)`% of the sum of the two random samples, `x + y`, are greater than zero. 
+
+Next we shall produce a scatter plots of `y ~ x`, with different colorings by the numeric and factor variables.
+```{r scatter}
+
+gg.scatter.x.y <- standard.normal.df %>%
+  ggplot() +
+  geom_point(aes(x, y), colour = "purple", alpha = 0.8, size = 1) +
+  ylab("Y - Random Sample ~ N(0,1)") +
+  xlab("X - Random Sample ~ N(0,1)") +
+  ggtitle("Scatter Plot of Standard Normals X,Y")
+
+gg.scatter.x.y
+
+gg.scatter.x.y.numeric <- standard.normal.df %>%
+  ggplot() +
+  geom_point(aes(x, y, color = numeric.logical), alpha = 0.8, size = 1) +
+  ylab("Y - Random Sample ~ N(0,1)") +
+  xlab("X - Random Sample ~ N(0,1)") +
+  ggtitle("Scatter Plot of Standard Normals X,Y")
+
+gg.scatter.x.y.numeric
+
+gg.scatter.x.y.factor <- standard.normal.df %>%
+  ggplot() +
+  geom_point(aes(x, y, color = numeric.logical), alpha = 0.8, size = 1) +
+  ylab("Y - Random Sample ~ N(0,1)") +
+  xlab("X - Random Sample ~ N(0,1)") +
+  ggtitle("Scatter Plot of Standard Normals X,Y")
+
+gg.scatter.x.y.factor
+```
