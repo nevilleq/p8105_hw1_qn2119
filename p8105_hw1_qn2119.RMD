@@ -21,19 +21,24 @@ First, we will create a data frame `variable.types.df`, containing a random samp
 #Defining number of columns in data frame
 n.col.df <- 10
 
-#Set the seed for reproducibility
+#Set the seed for reproducibility in random sample
 set.seed(24)
+
+#Generate a character sample using strsplit on a generic sample, need unlist to coerce to vector
+char.sentence <- "The quick brown fox jumped over the lazy dog"  
+char.word.sample <- unlist(strsplit(char.sentence, "[ ]"))
 
 #Creating our data frame with rUnif(0,5), logical, character random sample, and factor vars
 variable.types.df <- tibble(
   unif.sample = runif(n.col.df, min = 0, max = 5),
   logical.unif.g.2 = ifelse(unif.sample > 2, TRUE, FALSE),
-  char.sample = sample(c("0", "1", "2"), n.col.df, replace = TRUE),
+  char.sample = sample(char.word.sample, n.col.df, replace = TRUE),
   factor.char.sample = as.factor(char.sample)
 )
 ```
 
 Now, we will attempt to take the mean of each variable in `variable.types.df`.
+
 ```{r mean.var.types, warning = FALSE, message = FALSE}
 #Here we use the apply function to apply the mean function to each column var
 mean.variable.types <- apply(variable.types.df, 2, mean)
@@ -47,6 +52,20 @@ names(mean.variable.types) <- colnames(variable.types.df)
 mean.variable.types
 ```
 We see that the `mean()` function works for the Uniform sample variable because it is of numeric data type, and surprisingly also works for the logical variable describing whether each value in the sample is greater than two. This occurs because when `mean()` encounters a logical data type, it automatically converts it using `as.numeric()` to 1's and 0's, thus giving us the numeric proportion of `TRUE` for the logical variable. As for the character and factor variables, the `mean()` function does not work because these data types are non-numeric, and returns `NA` instead. 
+
+Now we will convert the character variable in `variable.types.df`to numeric data types. 
+
+```{r coercion.1, results = FALSE}
+#Using the mutate function in dplyr, we will create a new df with coerced numerics
+coerced.numeric.df <- variable.types.df %>%
+  mutate(numeric.logical.g.2 = as.numeric(logical.unif.g.2),
+         numeric.char.sample = as.numeric(char.sample),
+         numeric.factor.sample = as.numeric(factor.char.sample))
+
+#Check out the new variables
+head(coerced.numeric.df[,5:7])
+```
+
 
 #Problem 2
 
