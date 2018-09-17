@@ -6,14 +6,10 @@ header-includes:
   \usepackage{graphicx}
   \usepackage{float}
 output:
-#  github_document 
-   pdf_document: default
-   word_document: default
-   html_document:
-     toc: true
-     toc_float: true
+   github_document 
 ---
 
 #Problem 1
 
 #Problem 2
+
