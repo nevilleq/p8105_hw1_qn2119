@@ -1,0 +1,19 @@
+---
+title: "P8105 Homework 1"
+author: "Quinton Neville"
+date: "September 17, 2018"
+header-includes: 
+  \usepackage{graphicx}
+  \usepackage{float}
+output:
+#  github_document 
+   pdf_document: default
+   word_document: default
+   html_document:
+     toc: true
+     toc_float: true
+---
+
+#Problem 1
+
+#Problem 2
