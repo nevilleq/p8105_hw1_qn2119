@@ -15,9 +15,9 @@ library(tidyverse)
 ```
 
 #Problem 1
-First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $Y = [Zero,\ One,\ Two]$, and a coerced factor variable of the previous variable.
+First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $[Zero, One, Two]$, and a coerced factor variable of the previous variable.
 
-```{r}
+```{r var.types.df}
 #Defining number of columns in data frame
 n.col.df <- 10
 
