@@ -18,8 +18,8 @@ library(tidyverse)
 First, we will create a data frame `variable.types.df`, containing a random sample variable from a random variable $X \sim Uniform(0,5)$, a logical variable describing whether those elements are greater than two, and a character variable from a random sample from $Y$ = [Zero, One, Two], and a coerced factor variable of the previous variable.
 
 ```{r var.types.df}
-#Defining number of columns in data frame
-n.col.df <- 10
+#Defining number of rows/observations for our variable types data frame
+n.row.types.df <- 10
 
 #Set the seed for reproducibility in random sample
 set.seed(24)
@@ -30,10 +30,10 @@ char.word.sample <- unlist(strsplit(char.sentence, "[ ]"))
 
 #Creating our data frame with rUnif(0,5), logical, character random sample, and factor vars
 variable.types.df <- tibble(
-  unif.sample = runif(n.col.df, min = 0, max = 5),
-  logical.unif.g.2 = ifelse(unif.sample > 2, TRUE, FALSE),
-  char.sample = sample(char.word.sample, n.col.df, replace = TRUE),
-  factor.char.sample = as.factor(char.sample)
+  unif.sample = runif(n.row.types.df, min = 0, max = 5),                  #Random sample 10 rUnif(0,5)
+  logical.unif.g.2 = ifelse(unif.sample > 2, TRUE, FALSE),                #Logical, TRUE if rUnif > 2
+  char.sample = sample(char.word.sample, n.row.types.df, replace = TRUE), #Random char sample
+  factor.char.sample = as.factor(sample(1:5, n.row.types.df, replace = TRUE))   #Random factor sample, 5 levels
 )
 ```
 
@@ -69,7 +69,7 @@ head(coerced.numeric.df[,5:7])
 When we attempt to coerce the logical, character, and factor data types, respectively, we see that the logical is transformed from `TRUE` and `FALSE` to 1's and 0's, the character cannot be coerced to numeric and produces `NA`'s, while the factor variable is converted to a numeric describing which level in which the factor object resides. However, it is important to note that if a character variable took the form `c("1", "2", etc.), it would be coerced to the corresponding integer by `as.numeric()`. 
 
 Lastly, we will coerce the original character variable to factor to numeric and the original factor variable to character to numeric. 
-```{r}
+```{r coercion.2, results = FALSE, warning = FALSE}
 #Creating a new data frame with variables for the aforementioned data type coercions
 coerced.factor.char.df <- variable.types.df %>%
   mutate(char.coerced.factor.numeric = char.sample %>% as.factor %>% as.numeric,
@@ -78,6 +78,8 @@ coerced.factor.char.df <- variable.types.df %>%
 #Check out the new variables
 head(coerced.factor.char.df[,5:6])
 ```
+
+Again, we see that coercing the character variable to a factor and then numeric, transforms the character variable to a factor with 8 levels, then to a numeric describing the corresponding levels in which the corresponding factor resides. On the other hand, because our original factor variable was "numeric", in the sense that it had 5 levels, described 1-5, when we coerce this variable to a character, it looks like `c("1", "3", etc.)`. So when we then coerce it to numeric, it assumes the integer values described by the characters. If, however, the factor levels had been ordinal rather than numeric, the end result would have been `NA` as true character variables cannot be coerced to numeric, as we saw earlier. 
 
 
 
