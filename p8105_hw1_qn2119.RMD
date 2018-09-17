@@ -108,7 +108,9 @@ Next we shall produce a scatter plots of `y ~ x`, with different colorings by th
 #Here we are making a generic scatter plot of x, y from standard.norm.df using ggplot2
 gg.scatter.x.y <- standard.normal.df %>%
   ggplot() +
-  geom_point(aes(x, y), colour = "purple", alpha = 0.8, size = 1) +
+  geom_point(aes(x, y, colour = logical.sum.g.0), alpha = 0.8, size = 1) +
+    scale_colour_manual(values = c("purple", "cyan"),
+                      labels = expression("False", "True")) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
   ggtitle("Scatter Plot of Standard Normal Samples X,Y")
@@ -135,9 +137,8 @@ gg.scatter.x.y.numeric
 gg.scatter.x.y.factor <- standard.normal.df %>%
   ggplot() +
   geom_point(aes(x, y, color = factor.logical), alpha = 0.8, size = 1) +
-  scale_colour_manual(values = c("maroon", "darkblue"),
-                      labels = expression("False", "True")
-                      ) +
+  scale_colour_manual(values = c("purple", "cyan"),
+                      labels = expression("False", "True")) +
   ylab("Y - Random Sample ~ N(0,1)") +
   xlab("X - Random Sample ~ N(0,1)") +
   ggtitle("Scatter Plot of Standard Normal Samples X,Y; Colored by Factor Logical")
