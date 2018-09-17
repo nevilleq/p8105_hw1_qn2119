@@ -53,9 +53,9 @@ mean.variable.types
 ```
 We see that the `mean()` function works for the Uniform sample variable because it is of numeric data type, and surprisingly also works for the logical variable describing whether each value in the sample is greater than two. This occurs because when `mean()` encounters a logical data type, it automatically converts it using `as.numeric()` to 1's and 0's, thus giving us the numeric proportion of `TRUE` for the logical variable. As for the character and factor variables, the `mean()` function does not work because these data types are non-numeric, and returns `NA` instead. 
 
-Now we will convert the character variable in `variable.types.df`to numeric data types. 
+Now we will convert the logical, character, and factor variables in `variable.types.df`to numeric data types. 
 
-```{r coercion.1, results = FALSE}
+```{r coercion.1, results = FALSE, warning = FALSE}
 #Using the mutate function in dplyr, we will create a new df with coerced numerics
 coerced.numeric.df <- variable.types.df %>%
   mutate(numeric.logical.g.2 = as.numeric(logical.unif.g.2),
@@ -65,6 +65,21 @@ coerced.numeric.df <- variable.types.df %>%
 #Check out the new variables
 head(coerced.numeric.df[,5:7])
 ```
+
+When we attempt to coerce the logical, character, and factor data types, respectively, we see that the logical is transformed from `TRUE` and `FALSE` to 1's and 0's, the character cannot be coerced to numeric and produces `NA`'s, while the factor variable is converted to a numeric describing which level in which the factor object resides. However, it is important to note that if a character variable took the form `c("1", "2", etc.), it would be coerced to the corresponding integer by `as.numeric()`. 
+
+Lastly, we will coerce the original character variable to factor to numeric and the original factor variable to character to numeric. 
+```{r}
+#Creating a new data frame with variables for the aforementioned data type coercions
+coerced.factor.char.df <- variable.types.df %>%
+  mutate(char.coerced.factor.numeric = char.sample %>% as.factor %>% as.numeric,
+         factor.coerced.char.numeric = factor.char.sample %>% as.character %>% as.numeric)
+
+#Check out the new variables
+head(coerced.factor.char.df[,5:6])
+```
+
+
 
 
 #Problem 2
