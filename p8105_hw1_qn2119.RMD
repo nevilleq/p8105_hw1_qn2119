@@ -101,7 +101,7 @@ standard.normal.df <- tibble(
 )
 ```
 
-Here, our data frame `standard.normal.df` has `r nrow(standard.normal.df)` observations in `r ncol(standard.normal.df)` variables. Additionally, the standard normal random sample `x` has mean of `r mean(standard.normal.df$x)` and a median of `r median(standard.normal.df$x)`, closely approximating the distribution it was drawn from. Lastly, `r 100 * mean(standard.normal.df$logical.sum.g.0)`% of the sum of the two random samples, `x + y`, are greater than zero. 
+Here, our data frame `standard.normal.df` has `r nrow(standard.normal.df)` observations in `r ncol(standard.normal.df)` variables. Additionally, the standard normal random sample `x` elicits a mean of `r mean(standard.normal.df$x)` and a median of `r median(standard.normal.df$x)`, closely approximating the distribution it was drawn from. Lastly, `r 100 * mean(standard.normal.df$logical.sum.g.0)`% of the sum of the two random samples, `x + y`, are greater than zero. 
 
 Next we shall produce a scatter plots of `y ~ x`, with different colorings by the numeric and factor variables.
 ```{r scatter}
